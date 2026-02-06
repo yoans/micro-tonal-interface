@@ -1,0 +1,246 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    overflow: hidden;
+    touch-action: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+
+header {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 15px 20px;
+    backdrop-filter: blur(10px);
+    z-index: 100;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: center;
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+.control-group label {
+    font-size: 14px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+select, input[type="number"] {
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+    outline: none;
+}
+
+input[type="range"] {
+    width: 100px;
+    accent-color: #667eea;
+}
+
+input[type="number"] {
+    width: 80px;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow: auto;
+}
+
+#keyboard-container {
+    width: 100%;
+    max-width: 1200px;
+    height: 100%;
+    display: grid;
+    gap: 8px;
+    padding: 20px;
+}
+
+/* Layout-specific grid configurations */
+#keyboard-container.chromatic {
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    grid-auto-rows: minmax(80px, 1fr);
+}
+
+#keyboard-container.wicki-hayden,
+#keyboard-container.harmonic,
+#keyboard-container.janko {
+    grid-template-columns: repeat(8, 1fr);
+    grid-auto-rows: minmax(70px, 1fr);
+}
+
+.key {
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7));
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.1s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    touch-action: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.key:active,
+.key.active {
+    background: linear-gradient(145deg, #667eea, #764ba2);
+    transform: scale(0.95);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.key.active .key-note,
+.key.active .key-freq {
+    color: #fff;
+}
+
+.key-note {
+    font-size: 18px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 4px;
+}
+
+.key-freq {
+    font-size: 12px;
+    color: #666;
+    font-weight: 500;
+}
+
+/* Accidental keys (sharps/flats) styling */
+.key.accidental {
+    background: linear-gradient(145deg, rgba(50, 50, 50, 0.9), rgba(30, 30, 30, 0.8));
+}
+
+.key.accidental .key-note,
+.key.accidental .key-freq {
+    color: #fff;
+}
+
+footer {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 15px 20px;
+    backdrop-filter: blur(10px);
+}
+
+.info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    font-size: 14px;
+}
+
+#note-display {
+    font-weight: 600;
+    font-size: 16px;
+    min-height: 20px;
+}
+
+/* iPad specific optimizations */
+@media (max-width: 1024px) {
+    h1 {
+        font-size: 20px;
+    }
+    
+    .controls {
+        gap: 10px;
+    }
+    
+    .control-group {
+        padding: 6px 10px;
+    }
+    
+    .key-note {
+        font-size: 16px;
+    }
+    
+    .key-freq {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 10px 15px;
+    }
+    
+    h1 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+    
+    .controls {
+        gap: 8px;
+    }
+    
+    .control-group {
+        font-size: 12px;
+    }
+    
+    #keyboard-container {
+        gap: 6px;
+        padding: 10px;
+    }
+    
+    .key {
+        border-radius: 8px;
+    }
+    
+    .key-note {
+        font-size: 14px;
+    }
+    
+    .key-freq {
+        font-size: 10px;
+    }
+}
+
+/* Prevent scrolling and bounce on iOS */
+html, body {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    overscroll-behavior: none;
+}
