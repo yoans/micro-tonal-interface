@@ -22,12 +22,12 @@ class KeyboardLayout {
             return `${note}${octave}`;
         } else if (tuningType === '24-edo') {
             const octave = Math.floor(step / 24) + 4;
-            const noteIndex = step % 24;
+            const noteIndex = ((step % 24) + 24) % 24;
             if (noteIndex % 2 === 0) {
                 return `${noteNames[noteIndex / 2]}${octave}`;
             } else {
                 const baseNote = noteNames[Math.floor(noteIndex / 2)];
-                const nextNote = noteNames[Math.ceil(noteIndex / 2)];
+                const nextNote = noteNames[(Math.floor(noteIndex / 2) + 1) % 12];
                 return `${baseNote}♯/♭${nextNote}${octave}`;
             }
         } else {

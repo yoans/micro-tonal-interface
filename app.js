@@ -239,8 +239,11 @@ function updateNoteDisplay() {
         const noteText = activeNotes.map(note => {
             const keyElement = document.getElementById(note.id);
             if (keyElement) {
-                const noteName = keyElement.querySelector('.key-note').textContent;
-                return `${noteName} (${note.frequency.toFixed(2)} Hz)`;
+                const noteNameElement = keyElement.querySelector('.key-note');
+                if (noteNameElement) {
+                    const noteName = noteNameElement.textContent;
+                    return `${noteName} (${note.frequency.toFixed(2)} Hz)`;
+                }
             }
             return '';
         }).filter(text => text).join(', ');

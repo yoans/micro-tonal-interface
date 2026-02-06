@@ -164,13 +164,12 @@ class TuningSystem {
             8/5,      // Minor sixth
             5/3,      // Major sixth
             9/5,      // Minor seventh
-            15/8,     // Major seventh
-            2/1       // Octave
+            15/8      // Major seventh
         ];
         
         const octave = Math.floor(intervalIndex / 12);
-        const index = intervalIndex % 12;
-        const ratio = justRatios[index] || 1;
+        const index = ((intervalIndex % 12) + 12) % 12;
+        const ratio = justRatios[index];
         
         return this.baseFrequency * ratio * Math.pow(2, octave);
     }
